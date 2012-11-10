@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'django_db',                      # Or path to database file if using sqlite3.
+        'NAME': 'bund_db',                      # Or path to database file if using sqlite3.
         'USER': 'djangouser',                      # Not used with sqlite3.
         'PASSWORD': 'mypassword',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -24,11 +24,11 @@ DATABASES = {
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Europe/Berlin'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'de-de'
 
 SITE_ID = 1
 
@@ -108,6 +108,16 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+# add auto look for templates
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -115,12 +125,18 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # enable gis types and functions
     'django.contrib.gis',
-    # Uncomment the next line to enable the admin:
+    # enable Database Migration Tool South
+    'south',
+    # Openlayer Forms
+    'floppyforms',
+    # enable the django admin:
     'django.contrib.admin',
+    # import the geo app
     'bundproject.geography',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    
+    # insert the comment app here...
 )
 
 # A sample logging configuration. The only tangible logging

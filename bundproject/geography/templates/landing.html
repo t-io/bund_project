@@ -1,0 +1,58 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title> {{ headline }} </title>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/styles.css">
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/openlayers-function.js"></script>
+
+</head>
+<body>
+
+<h1> {{ headline }} </h1>
+
+<div id="main_map"></div>
+
+<hr />
+<hr />
+
+<div>
+	<table border="3" cellspacing="5" cellpadding="5">
+	{% for point in all_points %}
+    	<tr>
+    		<td>{{ point.name }}</td>
+    		<td>{{ point.point.x }}</td>
+    		<td>{{point.point.y}}</td>
+    		<td>Blabla</td>
+    	</tr>
+	{% endfor %}
+	</table>
+</div>
+
+
+<script>
+//initiate Map at div_id
+var map = new MapMaker("main_map");
+
+// create empty map
+map.createMap();
+
+//add points to map
+{% for point in all_points %}
+        map.addPoint("{{ point.point.x }}", "{{ point.point.y }}");
+{% endfor %}
+
+//set the center, different by user/district
+map.setCenter(10.283203125, 51.31054714, 6);
+
+
+</script>
+
+
+
+
+</body>
+
+</html>

@@ -1,17 +1,13 @@
 from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'bundproject.views.home', name='home'),
-    # url(r'^bundproject/', include('bundproject.foo.urls')),
+	#redirect all requests to the responsible apps
+	#in our case it's just one app --> geography
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+	url(r'^', include('bundproject.geography.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )
