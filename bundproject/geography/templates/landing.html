@@ -32,6 +32,22 @@
 </div>
 
 
+<hr />
+<hr />
+
+<div>
+    <table border="3" cellspacing="5" cellpadding="5">
+    {% for line in all_lines %}
+        <tr>
+            <td>{{ line.name }}</td>
+            <td>{{ line.line }}</td>
+            <td>Blabla</td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+
+
 <script>
 //initiate Map at div_id
 var map = new MapMaker("main_map");
@@ -42,6 +58,20 @@ map.createMap();
 //add points to map
 {% for point in all_points %}
         map.addPoint("{{ point.point.x }}", "{{ point.point.y }}");
+{% endfor %}
+
+{% for line in all_lines %}
+    /*
+    {% comment %} 
+    {% for x, y in line.line %} 
+        console.log("{{ x }}", "{{ y }}");
+    {% endfor %}
+    {% endcomment %}
+    */
+    
+
+    map.addline( "{{ line.line }}" );
+
 {% endfor %}
 
 //set the center, different by user/district

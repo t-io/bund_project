@@ -125,6 +125,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # get the SlugField
+    'django_autoslug',
     # enable gis types and functions
     'django.contrib.gis',
     # enable Database Migration Tool South

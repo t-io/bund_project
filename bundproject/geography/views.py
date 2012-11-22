@@ -20,15 +20,25 @@ def landing(request):
     points = Location.objects.order_by('name')
     lines = Road.objects.order_by('name')
 
+    '''
     print "Points: "
     for p in points:
     	print p.name
-    	#print p.getPoint()
-    
+    '''
+
+    print "\n\nLines: "
+    for l in lines:
+        print "\n",l
+        print "LinePoints"
+        for x, y in l.line:
+            print "X: ", x, " Y: ", y
+
+
+
     return render_to_response('landing.html', {
                                         'headline': headline,
-                                        'all_points' : points
-                                        #'opic_id' : opic_id
+                                        'all_points' : points,
+                                        'all_lines' : lines
                                         },
                                         context_instance = RequestContext(request)
                                     )

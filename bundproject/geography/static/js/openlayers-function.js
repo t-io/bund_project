@@ -43,6 +43,15 @@ MapMaker.prototype = {
         //add this to the Object VectorLayer
         this.vectorLayer.addFeatures([pointFeature]);
     },
+    addline: function (lineString){
+        console.log(lineString);
+        /*
+        for (var i = 0; i < lineString.length; i++){
+            console.log(lineString[i], lineString[i]);
+        }
+        */ 
+
+    },
     setCenter: function (point_x, point_y, zoom) {  
         // set center and zoom for the current Map
         this.map.setCenter(new OpenLayers.LonLat( point_x, point_y ), zoom);
