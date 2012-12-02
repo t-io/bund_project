@@ -5,6 +5,6 @@ urlpatterns = patterns('',
     url(r'^login/$', 'django.contrib.auth.views.login'),
 
     # All Urls for the geography app
-    url(r'^$', 'bundproject.geography.views.landing', name = 'landing'),
-
+    url(r'^$', 'bundproject.projekte.views.landing', name = 'landing'),
+    url(r'^add/$', 'bundproject.projekte.views.add_road', name = 'add_road'),
 )

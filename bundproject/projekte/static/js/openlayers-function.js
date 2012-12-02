@@ -2,12 +2,13 @@
 function MapMaker(id) {  
     this.id = id;
     this.map = new OpenLayers.Map(this.id);
+    this.lines = [];
 
-    // Layer contains MapBase
+    // BackgroundLayer
     this.layer = new OpenLayers.Layer.WMS( "OpenLayers WMS",
                "http://labs.metacarta.com/wms/vmap0", {layers: 'basic'} );
 
-    //Layer Style
+    //Layer Style ( at the moment for both layers, can be changed...maybe sometimes..)
     this.layer_style = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
         this.layer_style.fillOpacity = 0.2;
         this.layer_style.graphicOpacity = 1;
@@ -22,8 +23,16 @@ function MapMaker(id) {
         this.style_blue.rotation = 45;
         this.style_blue.strokeLinecap = "butt";
 
-    //new Vector Layer for Points
-    this.vectorLayer = new OpenLayers.Layer.Vector("Simple Geometry", {style: this.layer_style});
+    //Line Style
+    this.style_green = {
+        strokeColor: "#00FF00",
+        strokeOpacity: 0.7,
+        strokeWidth: 6
+    };
+
+    //create new Vector Layer for Points & Lines
+    this.vectorLayerPoints = new OpenLayers.Layer.Vector("Points Umgehungsstraßen", {style: this.layer_style});
+    this.vectorLayerLines = new OpenLayers.Layer.Vector("Lines Bundesstraßen", {style: this.layer_style});
 
 } 
 
@@ -32,8 +41,9 @@ MapMaker.prototype = {
         //add backgroundMap
         this.map.addLayer(this.layer);
         
-        // add Vectorlayer with Points
-        this.map.addLayer(this.vectorLayer);
+        // add Vectorlayer with Points & Lines
+        this.map.addLayer(this.vectorLayerPoints);
+        this.map.addLayer(this.vectorLayerLines);
     },  
     addPoint: function (point_x, point_y) {  
         // create GeometryPoints
@@ -41,23 +51,24 @@ MapMaker.prototype = {
         //Create FeaturePoint from Geometry
         var pointFeature = new OpenLayers.Feature.Vector(point, null, this.style_blue);
         //add this to the Object VectorLayer
-        this.vectorLayer.addFeatures([pointFeature]);
+        this.vectorLayerPoints.addFeatures([pointFeature]);
     },
-    addline: function (lineString){
-        console.log(lineString);
-        /*
-        for (var i = 0; i < lineString.length; i++){
-            console.log(lineString[i], lineString[i]);
+    createLine: function (pointArray){
+        // create a LineString from a PointArray and push it to an Array
+        lineString = new OpenLayers.Geometry.LineString(pointArray);
+        this.lines.push(lineString);
+    },
+    showlines: function(){
+        // get the Array of LineStrings and add the LineStrings to the VectorLayer
+        for (var i = 0; i < this.lines.length; i++){            
+            var lineFeature = new OpenLayers.Feature.Vector(this.lines[i], null, this.style_green);
+            this.vectorLayerLines.addFeatures([lineFeature]);
         }
-        */ 
 
     },
     setCenter: function (point_x, point_y, zoom) {  
         // set center and zoom for the current Map
         this.map.setCenter(new OpenLayers.LonLat( point_x, point_y ), zoom);
     }
-
-    // add Lines on a new VectorLayer
-
 
 };  

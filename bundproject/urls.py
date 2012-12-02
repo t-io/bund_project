@@ -5,9 +5,11 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-	#redirect all requests to the responsible apps
-	#in our case it's just one app --> geography
-
-	url(r'^', include('bundproject.geography.urls')),
+    url(r'^', include('bundproject.projekte.urls')),
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^login/$', 'django.contrib.auth.views.login'),
+
+    url(r'^logout/$', 'django.contrib.auth.views.logout',
+                          {'next_page': '/'}),
 )

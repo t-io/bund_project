@@ -1,0 +1,124 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title> BUND Projekt </title>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/landing_styles.css">
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/openlayers-function.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/helpers.js"></script>
+
+</head>
+<body>
+<header>
+    <h1>Bund Projekt</h1>
+    {% if user.is_authenticated %}
+        <p id="logout"> Hallo {{request.user.username}}&nbsp;| &nbsp;
+            <a href="/logout/">Logout</a></p>
+    {% else %}
+        <p id="login"> Hallo Gast &nbsp;| &nbsp;
+            <a href="/login/">Login</a></p>
+    {% endif %}
+</header>
+<div id="main_map"></div>
+
+<div id="info_table">
+    <!--  Dataset Filter Headline, changed if Values are filtered  -->
+    <h5>{{ filter_headline }}</h5>
+
+    <!--  Static Table Headlines  -->
+    <table border="3" cellspacing="5" cellpadding="5">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Art</th>
+            <th>Typ</th>
+            <th>Kosten</th>
+            <th>Bedarf</th>
+            <th>Planungsstand</th>
+          </tr>
+        </thead>
+
+        <!--  Dataset Filter  -->
+        <form id="myform" action="{% url landing %}" method="post">{% csrf_token %}
+            <thead id="searchform">
+                <tr>
+                    <th style="text-align:center;">
+                        <button id="searchbutton" type="submit">filter</button>
+                    </th>
+                    {% for field in searchform %}
+                        {% if field.is_hidden %}
+                            {{field}}
+                        {% else %}
+                            <th style="text-align:center;">{{field}}</th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            </thead>
+        </form>
+
+        <!--  Dataset depending from Filter  -->
+        <tbody>
+    {% for line in show_lines %}
+        <tr>
+            <td></td>
+            <td>{{ line.name }}</td>
+            <td>{{ line.art }}</td>
+            <td>{{ line.projekt_typ }}</td>
+            <td>{{ line.kosten }}</td>
+            <td>{{ line.bedarf }}</td>
+            <td>{{ line.planungsstand }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    <div class="pagination">
+    <span class="step-links">
+        {% if show_lines.has_previous %}
+            <a href="?page={{ show_lines.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ show_lines.number }} of {{ show_lines.paginator.num_pages }}.
+        </span>
+
+        {% if show_lines.has_next %}
+            <a href="?page={{ show_lines.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+
+
+<script>
+
+//initiate Map at div_id
+var map = new MapMaker("main_map");
+
+// create empty map
+map.createMap();
+
+// add lines to map
+{% for line in show_lines %}
+    // for every Line create an Array from LinePoints and call the createLine function 
+    myLine = []
+    {% for x, y in line.line %}
+        myLine.push( new OpenLayers.Geometry.Point(converToFloat("{{ x }}"), converToFloat("{{ y }}")) );
+    {% endfor %}
+    map.createLine( myLine );
+{% endfor %}
+
+// show all Lines on the map
+map.showlines();
+
+//set the center, different by user/district
+map.setCenter(10.283203125, 51.31054714, 6);
+
+
+</script>
+
+
+</body>
+</html>
