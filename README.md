@@ -21,3 +21,7 @@
 
 ###CURRENT STATE
 >![alt text](https://github.com/t-io/bund_project/blob/master/current_state.png "LandingPage for the Project")
+
+
+###PROJECT MEMBER
+>grischa thomas
