@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title> BUND Projekt </title>
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/landing_styles.css">
 
@@ -11,85 +11,170 @@
 
 </head>
 <body>
-<header>
-    <h1>Bund Projekt</h1>
-    {% if user.is_authenticated %}
-        <p id="logout"> Hallo {{request.user.username}}&nbsp;| &nbsp;
-            <a href="/logout/">Logout</a></p>
-    {% else %}
-        <p id="login"> Hallo Gast &nbsp;| &nbsp;
-            <a href="/login/">Login</a></p>
-    {% endif %}
-</header>
-<div id="main_map"></div>
 
-<div id="info_table">
-    <!--  Dataset Filter Headline, changed if Values are filtered  -->
-    <h5>{{ filter_headline }}</h5>
+<div class="container">
+    <div class="twelve columns">&nbsp;</div>
+    <div class="four columns login">
+        {% if user.is_authenticated %}
+            <p>Eingeloggt als {{request.user.username}}&nbsp;| &nbsp;
+            <a href="/logout/">ausloggen</a>
+        {% else %}
+            <p>Willkommen Gast&nbsp;| &nbsp;
+            <a href="/login/">einloggen?</a>
+        {% endif %}
+        </p>
+    </div>
+</div>
 
-    <!--  Static Table Headlines  -->
-    <table border="3" cellspacing="5" cellpadding="5">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Art</th>
-            <th>Typ</th>
-            <th>Kosten</th>
-            <th>Bedarf</th>
-            <th>Planungsstand</th>
-          </tr>
-        </thead>
+  <header id="header">
+    <div class="container">
+      <div class="sixteen columns">
 
-        <!--  Dataset Filter  -->
-        <form id="myform" action="{% url landing %}" method="post">{% csrf_token %}
-            <thead id="searchform">
-                <tr>
-                    <th style="text-align:center;">
-                        <button id="searchbutton" type="submit">filter</button>
-                    </th>
-                    {% for field in searchform %}
-                        {% if field.is_hidden %}
-                            {{field}}
-                        {% else %}
-                            <th style="text-align:center;">{{field}}</th>
-                        {% endif %}
+        <!-- nav begains here-->
+        <nav class="eleven columns alpha">
+            <div class="four columns alpha">
+                <h1><a href="index.html">logo</a></h1>
+            </div>
+            <div class="seven columns alpha">
+                <h3>Ein Projekt des Bundes für Umwelt- und Naturschutz Deutschland</h3>
+                <h2>Bundesverkehrswegeplan</h2>
+            </div>
+        </nav>
+        <!-- nav ends here-->
+        <nav class="five columns omega">
+        <ul>
+        <li>
+          <a href="#" class="street"></a>
+        </li>
+        <li>
+          <a href="#" class="schienen"></a>
+        </li>
+        <li>
+          <a href="#" class="ws"></a>
+        </li>
+        </ul>
+        </nav>
+
+      </div>
+    </div>
+  </header>
+
+<div class="rightBarWrapperMother">
+    <div class="rightBarWrapper">
+        <section class="rightBar">
+            <div class="headline">Bundesfernstraßen</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Baden-Württemberg</a></li>
+                    <li><a href="#">Bayern</a></li>
+                    <li><a href="#">Berlin</a></li>
+                    <li><a href="#">Brandenburg</a></li>
+                    <li><a href="#">Bremen</a></li>
+                    <li><a href="#">Hamburg</a></li>
+                    <li><a href="#">Hessen</a></li>
+                    <li><a href="#">Mecklenburg-Vorpommern</a></li>
+                    <li><a href="#">Niedersachsen</a></li>
+                    <li><a href="#">Nordrhein-Westfalen</a></li>
+                    <li><a href="#">Rheinland-Pfalz</a></li>
+                    <li><a href="#">Saarland</a></li>
+                    <li><a href="#">Sachsen</a></li>
+                    <li><a href="#">Sachsen-Anhalt</a></li>
+                    <li><a href="#">Schleswig-Holstein</a></li>
+                    <li><a href="#">Thüringen</a></li>
+                    <li class="clear"></li>
+                </ul>
+            </nav>
+        </section>
+    </div>
+
+    <div id="main_map"></div>
+</div>
+<section id="content">
+<div class="container">
+    <div class="sixteen columns omega">
+
+
+
+            <!--  Dataset Filter Headline, changed if Values are filtered  -->
+            <h5>{{ filter_headline }}</h5>
+
+            <!--  Static Table Headlines  -->
+            <table cellspacing="0">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Art</th>
+                    <th>Typ</th>
+                    <th>Kosten (in Mio €)</th>
+                    <th>Bedarf</th>
+                    <th>Planungsstand</th>
+                  </tr>
+                </thead>
+
+                <!--  Dataset Filter  -->
+                <form id="myform" action="{% url landing %}" method="post">{% csrf_token %}
+                    <thead id="searchform">
+                        <tr>
+                            <th style="text-align:center;">
+                                <button id="searchbutton" type="submit">filter</button>
+                            </th>
+                            {% for field in searchform %}
+                                {% if field.is_hidden %}
+                                    {{field}}
+                                {% else %}
+                                    <th style="text-align:center;">{{field}}</th>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                </form>
+
+                <!--  Dataset depending from Filter  -->
+                <tbody>
+                    {% for line in show_lines %}
+                        <tr>
+                            <td></td>
+                            <td>{{ line.name }}</td>
+                            <td>{{ line.art }}</td>
+                            <td>{{ line.projekt_typ }}</td>
+                            <td>{{ line.kosten }}</td>
+                            <td>{{ line.bedarf }}</td>
+                            <td>{{ line.planungsstand }}</td>
+                        </tr>
                     {% endfor %}
-                </tr>
-            </thead>
-        </form>
+                </tbody>
+            </table>
+            <div class="container">
+                <div class="sixteen columns" style="text-align: center; padding: 15px; 0 10px 0">
 
-        <!--  Dataset depending from Filter  -->
-        <tbody>
-    {% for line in show_lines %}
-        <tr>
-            <td></td>
-            <td>{{ line.name }}</td>
-            <td>{{ line.art }}</td>
-            <td>{{ line.projekt_typ }}</td>
-            <td>{{ line.kosten }}</td>
-            <td>{{ line.bedarf }}</td>
-            <td>{{ line.planungsstand }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-    </table>
-    <div class="pagination">
-    <span class="step-links">
-        {% if show_lines.has_previous %}
-            <a href="?page={{ show_lines.previous_page_number }}">previous</a>
-        {% endif %}
+                    <span class="step-links">
+                        {% if show_lines.has_previous %}
+                            <a href="?page={{ show_lines.previous_page_number }}" class="button">zurück</a>
+                        {% endif %}
 
-        <span class="current">
-            Page {{ show_lines.number }} of {{ show_lines.paginator.num_pages }}.
-        </span>
+                    <span class="current">
+                        Seite {{ show_lines.number }} von {{ show_lines.paginator.num_pages }}.
+                    </span>
 
-        {% if show_lines.has_next %}
-            <a href="?page={{ show_lines.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
-</div>
+                        {% if show_lines.has_next %}
+                            <a href="?page={{ show_lines.next_page_number }}" class="button">vorwärts</a>
+                        {% endif %}
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="eleven columns">&nbsp;</div>
+        <div class="five columns omega" style="text-align: center">    Code & Design by<br /><a href="http://geosolution.org/" target="_blank"><img src="../static/images/gsolution.png"></a></div>
+    </div>
+</footer>
 
 
 <script>
