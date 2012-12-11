@@ -3,6 +3,7 @@
 	<meta charset="UTF-8">
     <title> Bund Projekt </title>
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/login.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/template.css">
 
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/helpers.js"></script>
@@ -10,36 +11,39 @@
 </head>
 
 <body>
-<header>
-    <h1>BUND Projekt Login</h1>
-</header>
 
-{% if form.errors %}
-<p id="login_error">Ihr Nutzername und Password stimmen nicht, bitte versuchen sie es erneut</p>
+
+
+<section class="main">
+  <form class="loginform" action="{% url django.contrib.auth.views.login %}" method="post">
+    <div style="display:none;">
+      <input type="hidden" name="csrfmiddlewaretoken" value="a40fa8df328d0cd7bb0abb6d6f545fcf" />
+    </div>
+    <input type="hidden" name="next" value="{% url landing %}">
+    {% csrf_token %}
+
+    <h1><span class="log-in">In das Projekt einloggen</span></h1>
+    <span class="log-in" style="font-size: 10px;">{% if form.errors %}
+<p id="login_error">Nutzername und Password stimmen nicht.</p>
 {% else %}
-<p id="login_info">Bitte loggen sie sich mit ihrem Nutzernamen und Password ein </p>
-{% endif %}
-
-<form id="login-form" action="{% url django.contrib.auth.views.login %}" method="post">
-  <div style="display:none;">
-    <input type="hidden" name="csrfmiddlewaretoken" value="a40fa8df328d0cd7bb0abb6d6f545fcf" />
-  </div>
-  <input type="hidden" name="next" value="{% url landing %}">
-  {% csrf_token %}
-
-    <fieldset>
-      <legend>Log in</legend>
+<p id="login_info">Bitte loggen sie sich mit ihrem Nutzernamen und Password ein.</p>
+{% endif %}</span>
+    <p class="float">
       <label for="login">{{ form.username.label_tag }}</label>
       {{ form.username }}
-      <div class="clear"></div>
-
-      <label for="password">{{ form.password.label_tag }}</label>
+    </p>
+    <p class="float">
+      <label for="login">{{ form.password.label_tag }}</label>
       {{ form.password }}
-      <div class="clear"></div>
-      <br />
+    </p>
+    <p class="clearfix">
       <input type="submit" name="commit" value="login"/>
       <input type="hidden" name="next" value="{% url landing %}" />
-    </fieldset>
+    </p>
   </form>
+</section>
+
+
+
 </body>
 </html>
