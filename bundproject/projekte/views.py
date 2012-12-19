@@ -83,3 +83,29 @@ def add_road(request):
                               context_instance=RequestContext(request))
 
 
+
+def details(request, slug_name):
+
+    #Detailansicht einer einzelnen Strasse
+    entry = get_object_or_404(Road, slug = slug_name)
+    
+    return render_to_response('details.html', { 'road' : entry },
+                          context_instance=RequestContext(request))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

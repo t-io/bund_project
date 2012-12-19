@@ -16,11 +16,11 @@
     <div class="twelve columns">&nbsp;</div>
     <div class="four columns login">
         {% if user.is_authenticated %}
-            <p>Eingeloggt als {{request.user.username}}&nbsp;| &nbsp;
+            <p>Eingeloggt als {{request.user.username}}&nbsp;|
             <a href="/logout/">ausloggen</a>
         {% else %}
             <p>Willkommen Gast&nbsp;| &nbsp;
-            <a href="/login/">einloggen?</a>
+            <a href="/login/">einloggen</a>
         {% endif %}
         </p>
     </div>
@@ -135,7 +135,7 @@
                     {% for line in show_lines %}
                         <tr>
                             <td></td>
-                            <td>{{ line.name }}</td>
+                            <td onclick="window.location.href='{{line.slug}}'">{{ line.name }}</td>
                             <td>{{ line.art }}</td>
                             <td>{{ line.projekt_typ }}</td>
                             <td>{{ line.kosten }}</td>

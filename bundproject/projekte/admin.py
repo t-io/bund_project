@@ -34,10 +34,12 @@ class UserProfileInline(admin.StackedInline):
     verbose_name = 'Profil'
 
 # Define a new User admin
-class UserAdmin(UserAdmin):
+class UsersAdmin(UserAdmin):
     inlines = (UserProfileInline, )
-    fieldsets = ((None, {'fields': ('username','email','first_name', 'last_name',),}),)
+    fieldsets = ((None, {'fields': ('username','email','password','first_name', 'last_name',),}),)
+
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
+
 
     add_fieldsets = (
         (None, {
@@ -47,14 +49,49 @@ class UserAdmin(UserAdmin):
     )
 
 
+    def response_add(self, request, obj, post_url_continue='../%s/'):
+        """
+        Determines the HttpResponse for the add_view stage. It mostly defers to
+        its superclass implementation but is customized because the User model
+        has a slightly different workflow.
+        """
+        # We should allow further modification of the user just added i.e. the
+        # 'Save' button should behave like the 'Save and continue editing'
+        # button except in two scenarios:
+        # * The user has pressed the 'Save and add another' button
+        # * We are adding a user in a popup
+        #if '_addanother' not in request.POST and '_popup' not in request.POST:
+        #    request.POST['_continue'] = 1
+        return super(UserAdmin, self).response_add(request, obj,
+                                                   post_url_continue)
+
+
+
 
 class RoadAdmin(admin.GeoModelAdmin):
-	search_fields = ['name']
-	list_display = ['name','art','projekt_typ','verlauf_von','verlauf_bis','kosten','bedarf','planungsstand','nutz_kost_verh']
+    search_fields = ['name']
+    list_display = ['name','art','projekt_typ','verlauf_von','verlauf_bis','kosten','bedarf','planungsstand','nutz_kost_verh']
 
-	default_lon = 10.283203125
-	default_lat = 51.31054714
-	default_zoom = 6
+    default_lon = 10.283203125
+    default_lat = 51.31054714
+    default_zoom = 6
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'erstellt_von':
+            kwargs['queryset'] = User.objects.filter(username=request.user.username)
+        return super(RoadAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj is not None:
+            return self.readonly_fields + ('erstellt_von',)
+        return self.readonly_fields
+
+    def add_view(self, request, form_url="", extra_context=None):
+        data = request.GET.copy()
+        data['erstellt_von'] = request.user
+        request.GET = data
+        return super(RoadAdmin, self).add_view(request, form_url="", extra_context=extra_context)
+
 
 
 class LocationAdmin(admin.GeoModelAdmin):
@@ -70,7 +107,7 @@ class WaterwayAdmin(admin.GeoModelAdmin):
 
 # Re-register UserAdmin
 admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+admin.site.register(User, UsersAdmin)
 
 admin.site.unregister(Group)
 admin.site.unregister(Site)

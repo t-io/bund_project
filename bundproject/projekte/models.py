@@ -5,6 +5,8 @@ from django.contrib.gis.db import models
 from django.contrib.gis.geos import LineString
 from django_autoslug.fields import AutoSlugField
 from django.core.validators import MaxLengthValidator
+from django.core.files.uploadedfile import SimpleUploadedFile
+from PIL import Image
 
 
 class UserProfile(models.Model):
@@ -103,8 +105,27 @@ class Road(models.Model):
         ('sehr hoch', 'sehr hoch'),
     )
 
+    LAND = (
+        ('Berlin','Berlin'),
+        ('Brandenburg', 'Brandenburg'),
+        ('Sachsen', 'Sachsen'),
+        ('Hamburg', 'Hamburg'),
+        ('Bremen',  'Bremen'),
+        ('Mecklemburg Vorpommern', 'Mecklemburg Vorpommern'),
+        ('Tühringen',  'Tühringen'),
+        ('Bayern', 'Bayern'),
+        ('Sachsen Anhalt','Sachsen Anhalt'),
+        ('Saarland',  'Saarland'),
+        ('Hessen',  'Hessen'),
+        ('Nordrhein-Westfalen','Nordrhein-Westfalen'),
+        ('Niedersachsen', 'Niedersachsen'),
+        ('Schleswig Holstein', 'Schleswig Holstein'),
+        ('Bayern','Bayern'),
+        ('Rheinland-Pfalz','Rheinland-Pfalz'),
+    )
+
     # Straßen Informationen
-    name = models.CharField("Name",max_length=255)
+    name = models.CharField("Name", unique=True ,max_length=255)
     slug = AutoSlugField(populate_from='name', unique=True, max_length=255, overwrite=True)
     art = models.CharField("Art der Fernstraße", max_length=2, choices=(('AU','Autobahn'),('BU','Bundesstraße')), blank=True, null = True)
     projekt_typ = models.CharField("Art des Projekts", max_length=1, choices=(('A','Ausbau'),('N','Neubau')), blank=True, null = True)
@@ -121,13 +142,24 @@ class Road(models.Model):
     # Projektbewertung
     nutz_kost_verh = models.DecimalField("Nutzen/Kosten Verhältnis",max_digits=4, decimal_places=1)
     umweltrisiko = models.CharField("Umweltrisiko", max_length=12, choices=RISIKO, blank=True, null = True)
-    raumw_analyse = models.IntegerField("Raumwirksamkeitsanalyse", blank=True, null = True)
+    raumw_analyse = models.IntegerField("Raumwirksamkeit", blank=True, null = True)
     stadr_bewert = models.IntegerField("Städtebauliche Bewertung", blank=True, null = True)
 
     #Planungsziele & BUND Position
     projekt_ziel = models.TextField("Offizielles Projektziel", validators=[MaxLengthValidator(200)])
     kritik = models.TextField("Kritik", validators=[MaxLengthValidator(200)])
     alternativen = models.TextField("Alternativen", validators=[MaxLengthValidator(200)])
+
+    bild = models.ImageField(upload_to ="photos/roads/")
+
+    # Sichtbarkeit des Projektes
+    sichtbar = models.BooleanField(default=True);
+
+    # Zugehöriges Bundesland
+    bundesland = models.CharField("Bundesland", max_length=23, choices=LAND)
+
+    # Zugehöriger User
+    erstellt_von = models.ForeignKey(User, related_name="Erstellt von")
 
     class Meta:
         verbose_name = "Fernstraße"
