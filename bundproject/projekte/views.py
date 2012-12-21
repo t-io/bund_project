@@ -12,6 +12,7 @@ from bundproject.projekte.models import Road
 
 from bundproject.projekte.forms import SearchForm
 from bundproject.projekte.forms import GeoForm
+from django.contrib.auth.models import User
 
 
 def landing(request):
@@ -33,7 +34,7 @@ def landing(request):
             	filter_headline = "Gefilterte Datensätze"
 
     """	Django Pagination	"""
-    paginator = Paginator(lines, 1) # Show 25 contacts per page
+    paginator = Paginator(lines, 20) # Show 25 contacts per page
     page = request.GET.get('page')
     try:
         show_lines = paginator.page(page)
@@ -44,21 +45,6 @@ def landing(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         show_lines = paginator.page(paginator.num_pages)
 
-
-
-
-    '''
-    print "\n\nLines: "
-    for l in lines:
-        print "\n",l
-        print "LinePoints"
-        for x, y in l.line:
-            print "X: ", x, " Y: ", y
-    
-    print filter_headline
-    print "RequestInfo: ", searchForm.requestInfo()
-    '''
-    
 
     return render_to_response('landing.html', {
                                         'filter_headline': filter_headline,
@@ -71,9 +57,10 @@ def landing(request):
 
 #neuer Eintrag
 def add_road(request):
-    # sticks in a POST or renders empty form
     form = GeoForm(request.POST or None)
     if form.is_valid():
+
+        form.instance.erstellt_von = User.objects.get( username = request.user.username )
         cmodel = form.save()
         cmodel.save()
         return redirect(landing)

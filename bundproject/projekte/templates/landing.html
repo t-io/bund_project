@@ -5,6 +5,8 @@
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/landing_styles.css">
 
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
 	<script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}js/openlayers-function.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/helpers.js"></script>
@@ -65,22 +67,22 @@
             <div class="headline">Bundesfernstraßen</div>
             <nav>
                 <ul>
-                    <li><a href="#">Baden-Württemberg</a></li>
-                    <li><a href="#">Bayern</a></li>
-                    <li><a href="#">Berlin</a></li>
-                    <li><a href="#">Brandenburg</a></li>
-                    <li><a href="#">Bremen</a></li>
-                    <li><a href="#">Hamburg</a></li>
-                    <li><a href="#">Hessen</a></li>
-                    <li><a href="#">Mecklenburg-Vorpommern</a></li>
-                    <li><a href="#">Niedersachsen</a></li>
-                    <li><a href="#">Nordrhein-Westfalen</a></li>
-                    <li><a href="#">Rheinland-Pfalz</a></li>
-                    <li><a href="#">Saarland</a></li>
-                    <li><a href="#">Sachsen</a></li>
-                    <li><a href="#">Sachsen-Anhalt</a></li>
-                    <li><a href="#">Schleswig-Holstein</a></li>
-                    <li><a href="#">Thüringen</a></li>
+                    <li><a class="bt_zoom" href="#">Baden-Württemberg</a></li>
+                    <li><a class="bt_zoom" href="#">Bayern</a></li>
+                    <li><a class="bt_zoom" href="#">Berlin</a></li>
+                    <li><a class="bt_zoom" href="#">Brandenburg</a></li>
+                    <li><a class="bt_zoom" href="#">Bremen</a></li>
+                    <li><a class="bt_zoom" href="#">Hamburg</a></li>
+                    <li><a class="bt_zoom" href="#">Hessen</a></li>
+                    <li><a class="bt_zoom" href="#">Mecklenburg-Vorpommern</a></li>
+                    <li><a class="bt_zoom" href="#">Niedersachsen</a></li>
+                    <li><a class="bt_zoom" href="#">Nordrhein-Westfalen</a></li>
+                    <li><a class="bt_zoom" href="#">Rheinland-Pfalz</a></li>
+                    <li><a class="bt_zoom" href="#">Saarland</a></li>
+                    <li><a class="bt_zoom" href="#">Sachsen</a></li>
+                    <li><a class="bt_zoom" href="#">Sachsen-Anhalt</a></li>
+                    <li><a class="bt_zoom" href="#">Schleswig-Holstein</a></li>
+                    <li><a class="bt_zoom" href="#">Thüringen</a></li>
                     <li class="clear"></li>
                 </ul>
             </nav>
@@ -105,8 +107,8 @@
                     <th></th>
                     <th>Name</th>
                     <th>Art</th>
+                    <th>Bundesland</th>
                     <th>Typ</th>
-                    <th>Kosten (in Mio €)</th>
                     <th>Bedarf</th>
                     <th>Planungsstand</th>
                   </tr>
@@ -132,17 +134,38 @@
 
                 <!--  Dataset depending from Filter  -->
                 <tbody>
-                    {% for line in show_lines %}
-                        <tr>
-                            <td></td>
-                            <td onclick="window.location.href='{{line.slug}}'">{{ line.name }}</td>
-                            <td>{{ line.art }}</td>
-                            <td>{{ line.projekt_typ }}</td>
-                            <td>{{ line.kosten }}</td>
-                            <td>{{ line.bedarf }}</td>
-                            <td>{{ line.planungsstand }}</td>
-                        </tr>
-                    {% endfor %}
+                    {% if user.is_authenticated %}
+                        {% for line in show_lines %}
+                            {% if line.sichtbar %}
+                                <tr class="table_visib">
+                            {% else %}
+                                <tr class="table_invisb">
+                            {% endif%}
+                                <td></td>
+                                <td onclick="window.location.href='detail/{{line.slug}}'">{{ line.name }}</td>
+                                <td>{{ line.art }}</td>
+                                <td>{{ line.bundesland }}</td>
+                                <td>{{ line.projekt_typ }}</td>
+                                <td>{{ line.bedarf }}</td>
+                                <td>{{ line.planungsstand }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        {% for line in show_lines %}
+                            {% if line.sichtbar %}
+                                <tr class="table_visib">
+                                    <td></td>
+                                    <td onclick="window.location.href='detail/{{line.slug}}'">{{ line.name }}</td>
+                                    <td>{{ line.art }}</td>
+                                    <td>{{ line.bundesland }}</td>
+                                    <td>{{ line.projekt_typ }}</td>
+                                    <td>{{ line.bedarf }}</td>
+                                    <td>{{ line.planungsstand }}</td>
+                                </tr>
+                            {% endif%}
+                        {% endfor %}
+                    {% endif %}
+                    
                 </tbody>
             </table>
             <div class="container">
@@ -189,10 +212,12 @@ map.createMap();
 {% for line in show_lines %}
     // for every Line create an Array from LinePoints and call the createLine function 
     myLine = []
-    {% for x, y in line.line %}
-        myLine.push( new OpenLayers.Geometry.Point(converToFloat("{{ x }}"), converToFloat("{{ y }}")) );
-    {% endfor %}
-    map.createLine( myLine );
+    {% if line.sichtbar %}
+        {% for x, y in line.line %}
+            myLine.push( new OpenLayers.Geometry.Point(converToFloat("{{ x }}"), converToFloat("{{ y }}")) );
+        {% endfor %} 
+        map.createLine( myLine, "{{ line.art }}");
+    {% endif %}
 {% endfor %}
 
 // show all Lines on the map
@@ -200,7 +225,7 @@ map.showlines();
 
 //set the center, different by user/district
 map.setCenter(10.283203125, 51.31054714, 6);
-
+//map.setCenter(51.31054714, 10.283203125, 6);
 
 </script>
 

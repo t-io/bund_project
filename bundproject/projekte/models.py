@@ -146,11 +146,12 @@ class Road(models.Model):
     stadr_bewert = models.IntegerField("Städtebauliche Bewertung", blank=True, null = True)
 
     #Planungsziele & BUND Position
-    projekt_ziel = models.TextField("Offizielles Projektziel", validators=[MaxLengthValidator(200)])
-    kritik = models.TextField("Kritik", validators=[MaxLengthValidator(200)])
-    alternativen = models.TextField("Alternativen", validators=[MaxLengthValidator(200)])
+    projekt_ziel = models.TextField("Offizielles Projektziel",blank=True, null = True, validators=[MaxLengthValidator(1200)])
+    kritik = models.TextField("Kritik", blank=True, null = True, validators=[MaxLengthValidator(1200)])
+    alternativen = models.TextField("Alternativen",blank=True, null = True, validators=[MaxLengthValidator(1200)])
 
-    bild = models.ImageField(upload_to ="photos/roads/")
+    bild = models.ImageField(upload_to ="photos/roads/%Y%m%d/%H%M%S/", blank = True, null=True)
+
 
     # Sichtbarkeit des Projektes
     sichtbar = models.BooleanField(default=True);

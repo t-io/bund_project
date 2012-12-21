@@ -7,5 +7,5 @@ urlpatterns = patterns('',
     # All Urls for the geography app
     url(r'^$', 'bundproject.projekte.views.landing', name = 'landing'),
     url(r'^add/$', 'bundproject.projekte.views.add_road', name = 'add_road'),
-    url(r'^(?P<slug_name>\w+)/$', 'bundproject.projekte.views.details', name = 'road_details'),
+    url(r'^detail/(?P<slug_name>\w+)/$', 'bundproject.projekte.views.details', name = 'road_details'),
 )

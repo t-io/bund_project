@@ -1,0 +1,17 @@
+{% extends "floppyforms/gis/openlayers.html" %}
+
+{% block options %}
+{{ block.super }}
+
+// Erweitert das JS von django-floppyForms, ermöglicht so das anpassen über optionen
+
+//https://django-floppyforms.readthedocs.org/en/latest/geodjango.html?highlight=BaseGMapWidget
+
+options['base_layer'] = new OpenLayers.Layer.OSM();
+
+options['default_zoom'] = 6;
+options['default_lon'] = 10,283203125;
+options['default_lat'] = 51,31054714;
+
+
+{% endblock %}
