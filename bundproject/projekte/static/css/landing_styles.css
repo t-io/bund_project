@@ -363,7 +363,8 @@ header nav ul li a.street {
 /* end */
 /* ==== content table elements === */
 select {
-  font-size: 10px;
+  font:100 10px 'Arial', sans-serif;
+  color: #888;
   -webkit-appearance: button;
   -webkit-border-radius: 2px;
   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -374,8 +375,6 @@ select {
     -webkit-linear-gradient(#fff, #fafafa 40%, #f7f7f7);
   background-position: center right;
   background-repeat: no-repeat;
-  color: #888;
-  font-size: inherit;
   margin: 0;
   overflow: hidden;
   padding-top: 2px;
@@ -395,12 +394,14 @@ select:hover {
 
 /* ==== SECTION FILTERAREAS === */
 #filterArea {
-  width: 100%;  background: #94c445; color: #fff; padding: 0px 0 0px 0;
+  width: 100%;  
+  background: #94c445; 
+  color: #fff; 
+  padding: 0px 0 0px 0;
   z-index:10000;
 }
 /* Table Elements */
 #filterArea table {
-  border:1px solid #94c445;
   -moz-box-shadow: -6px -6px 0px rgba(0,0,0,0.15);
   -webkit-box-shadow: -6px -6px 0px rgba(0,0,0,0.15);
   box-shadow: -6px -6px 0px rgba(0,0,0,0.15);
@@ -411,7 +412,6 @@ select:hover {
   border: 1px solid #d5d5d5;
 }
 #filterArea th {
-  padding-top: 0px; 
   border-left:1px solid #fefefe;
   border-right:1px solid #d3d3d3;
   background: #fff;
@@ -472,9 +472,6 @@ td {
   border-right:1px solid #f2f2f2;
   max-height: 25px;
 }
-td.first, th.first {text-align:left}
-td.last {border-right:none;}
-
 /* TD definitions and grid properties */
 td:first-child {
   width: 10%;
@@ -532,7 +529,7 @@ tr:last-child td.last {
 .table_invisib td:nth-child(odd) {   background: #eeeeee; color: #dedede; }
 
 
-/* Unter Vorbehalt noch drin !!! */
+/* Button in FilterArea */
 #searchbutton {
   -webkit-appearance: button;
   -webkit-border-radius: 2px;
@@ -540,10 +537,7 @@ tr:last-child td.last {
   -webkit-padding-end: 20px;
   -webkit-padding-start: 2px;
   -webkit-user-select: none;
-  background-image: url(../images/select-arrow.png), 
-    -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
-  background-position: center right;
-  background-repeat: no-repeat;
+  background: -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
   border: 1px solid #AAA;
   color: #888;
   font-size: inherit;
@@ -565,18 +559,14 @@ tr:last-child td.last {
 
 /* === pagination === */
 a.button {
-  font-family: Arial;
+  font:100 12px 'Arial', sans-serif;
   color: #ffffff;
-  font-size: 12px;
-  padding-top: 5px;
-  padding-right: 8px;
-  padding-bottom: 5px;
-  padding-left: 8px;
+  text-shadow: 1px 1px 3px #cecece;
   text-decoration: none;
+  padding: 5px 8px 5px 8px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  text-shadow: 1px 1px 3px #cecece;
   border: solid #ffffff 1px;
   background: #cccccc;
 }
@@ -587,16 +577,15 @@ a.button:hover {
 
 /* === Buttons for datatables === */
 .databutton {
-  font-family: Arial;
-  color: #c9c9c9;
-  font-size: 14px;
-  padding: 4px;
+  font:100 14px 'Arial', sans-serif;
   text-decoration: none;
   text-align: center;
+  text-shadow: 1px 1px 1px #ffffff;
+  color: #c9c9c9;
+  padding: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  text-shadow: 1px 1px 1px #ffffff;
   border: solid #dadada 1px;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#f5f5f5), to(#ededed));
   background: -moz-linear-gradient(top, #f5f5f5, #ededed);
@@ -619,22 +608,21 @@ a.button:hover {
 }
 /* If the data button should not be pressed */
 .databuttonInvisb {
-  font-family: Arial;
+  font:100 14px 'Arial', sans-serif;
   color: #ededed;
-  font-size: 14px;
-  padding: 4px;
   text-decoration: none;
   text-align: center;
+  text-shadow: 1px 1px 1px #ffffff;
+  padding: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  text-shadow: 1px 1px 1px #ffffff;
   border: solid #ededed 1px;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#fcfcfc), to(#f5f5f5));
   background: -moz-linear-gradient(top, #fcfcfc, #f5f5f5);
   -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=#fcfcfc, endColorStr=#f5f5f5);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=#fcfcfc, endColorStr=#f5f5f5);
-  display:inline-block; /* IE is so silly */
+  display:inline-block; /* IE sucks */
   width: 90%;
 }
 /* === Image definition === */

@@ -84,7 +84,13 @@
                             Projektart:
                         </div>
                         <div class="right">
-                            {{road.art}}
+                            {% if road.art == "AU" %}
+                                Autobahn
+                            {% elif road.art == "BU" %}
+                                Bundesstraße
+                            {% else %}
+                                {{road.art}}
+                            {% endif%}
                         </div>
                     </div>
                 </div>
@@ -95,7 +101,13 @@
                             Projekttyp
                         </div>
                         <div class="right">
-                            {{road.projekt_typ}}
+                            {% if road.projekt_typ == "A" %}
+                                Ausbau
+                            {% elif road.projekt_typ == "N" %}
+                                Neubau
+                            {% else %}
+                                {{road.projekt_typ}}
+                            {% endif%}
                         </div>
                     </div>
                 </div>
@@ -106,7 +118,15 @@
                             Bedarf
                         </div>
                         <div class="right">
-                            {{road.bedarf}}
+                            {% if road.bedarf == "VB" %}
+                                vordringlicher Bedarf
+                            {% elif road.bedarf == "WB" %}
+                                weiterer Bedarf
+                            {% elif road.bedarf == "KB" %}
+                                kein Bedarf
+                            {% else %}
+                                {{road.bedarf}}
+                            {% endif%}
                         </div>
                     </div>
                 </div>
