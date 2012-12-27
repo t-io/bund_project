@@ -1,29 +1,236 @@
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title> BUND Projekt - {{road.name}}</title>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/landing_styles.css">
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+	<script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/openlayers-function.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/helpers.js"></script>
 
 </head>
 <body>
-	<h1>{{road.name}}</h1>
-	<h6>Art: {{road.art}}</h6>
-	<h6>Projekt: {{road.projekt_typ}}</h6>
-	<h6>Verlauf von: {{road.verlauf_von}}</h6>
-	<h6>Verlauf bis: {{road.verlauf_bis}}</h6>
-	<h6>Kosten: {{road.kosten}}</h6>
-	<h6>Badarf: {{road.bedarf}}</h6>
-	<h6>Planungsstand: {{road.planungsstand}}</h6>
-	<h6>Linie: {{road.line}}</h6>
-	<h6>Kosten/Nutzen Verhältnis: {{road.nutz_kost_verh}}</h6>
-	<h6>Umweltrisiko: {{road.umweltrisiko}}</h6>
-	<h6>Raumwirsamkeitanalyse: {{road.raumw_analyse}}</h6>
-	<h6>Städtebauliche Bewertung: {{road.stadr_bewert}}</h6>
-	<h6>Projekt Ziel: {{road.projekt_ziel}}</h6>
-	<h6>Kritik: {{road.kritik}}</h6>
-	<h6>Alternativen: {{road.alternativen}}</h6>
 
-	<img src="{% url landing %}media/{{road.bild}}" />
+<div class="container">
+    <div class="twelve columns">&nbsp;</div>
+    <div class="four columns login">
+        {% if user.is_authenticated %}
+            <p>Eingeloggt als {{request.user.username}}&nbsp;|
+            <a href="/logout/">ausloggen</a>
+        {% else %}
+            <p>Willkommen Gast&nbsp;| &nbsp;
+            <a href="/login/">einloggen</a>
+        {% endif %}
+        </p>
+    </div>
+</div>
+
+  <header id="header">
+    <div class="container">
+      <div class="sixteen columns">
+        <!-- nav begains here-->
+        <nav class="eleven columns alpha">
+            <div class="four columns alpha">
+                <h1><a href="../../">logo</a></h1>
+            </div>
+            <div class="seven columns alpha">
+                <h3>Ein Projekt des Bundes für Umwelt- und Naturschutz Deutschland</h3>
+                <h2>Bundesverkehrswegeplan</h2>
+            </div>
+        </nav>
+        <!-- nav ends here-->
+        <nav class="five columns omega">
+        <ul>
+        <li>
+          <a href="#" class="street"></a>
+        </li>
+        <li>
+          <a href="#" class="schienen"></a>
+        </li>
+        <li>
+          <a href="#" class="ws"></a>
+        </li>
+        </ul>
+        </nav>
+
+      </div>
+    </div>
+  </header>
+
+
+<section id="content">
+    <div class="container" style="margin-top: 10px;">
+      	<div class="sixteen columns">
+            <div class="headline top bottom">Sie befinden sich hier: <a href="../../">Übersicht</a> / {{road.name}}</div>
+            
+        </div>
+        <div class="sixteen columns">
+            <div class="six columns alpha">
+{% if road.bild = "" %}
+<div class="headline bottom">Kein Bild vorhanden</div>
+{% else %}
+    <img src="{% url landing %}media/{{road.bild}}" class="image" />
+{% endif %}
+                
+
+                <div class="headline" style="margin-top: 10px;">Details zum Projekt: {{road.name}}</div>
+
+                <div class="content">
+                    <div class="container">
+                        <div class="left">
+                            Projektart:
+                        </div>
+                        <div class="right">
+                            {{road.art}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="container">
+                        <div class="left">
+                            Projekttyp
+                        </div>
+                        <div class="right">
+                            {{road.projekt_typ}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="container">
+                        <div class="left">
+                            Bedarf
+                        </div>
+                        <div class="right">
+                            {{road.bedarf}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="container">
+                        <div class="left">
+                            Verlauf von
+                        </div>
+                        <div class="right">
+                            {{road.verlauf_von}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="container">
+                        <div class="left">
+                            bis
+                        </div>
+                        <div class="right">
+                            {{road.verlauf_bis}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content bottom">
+                    <div class="container">
+                        <div class="left">
+                            Kosten:
+                        </div>
+                        <div class="right">
+                            {{road.kosten}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="headline" style="margin-top: 10px;">Weitere Informationen</div>
+
+                <div class="content">
+                    <div class="container">
+                        <div class="left">
+                            Planungsstand
+                        </div>
+                        <div class="right">
+                            {{road.planungsstand}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="container">
+                        <div class="left">
+                            Kosten-/Nutzungsverhältnis
+                        </div>
+                        <div class="right">
+                            {{road.nutz_kost_verh}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="container">
+                        <div class="left">
+                            Umweltrisiko
+                        </div>
+                        <div class="right">
+                            {{road.umweltrisiko}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content bottom">
+                    <div class="container">
+                        <div class="left">
+                            Raumwirsamkeitanalyse
+                        </div>
+                        <div class="right">
+                            {{road.raumw_analyse}}
+                        </div>
+                    </div>
+                </div>
 
 
 
+            </div>
+            <div class="ten columns omega">
+
+
+                <div class="headline">Projektziel</div>
+                <div class="content bottom">
+                        <p>
+                        {{road.projekt_ziel}}
+                        </p>
+                </div>
+
+
+                <div class="headline" style="margin-top: 10px;">Kritik</div>
+                <div class="content bottom">
+                        <p>
+                        {{road.kritik}}
+                        </p>
+                </div>
+
+                <div class="headline" style="margin-top: 10px;">Alternativen</div>
+                <div class="content bottom">
+                        <p>
+                        {{road.alternativen}}
+                        </p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<footer>
+    <div class="container">
+        <div class="six columns">&nbsp;</div>
+        <div class="five columns" style="text-align: center">Ein Projekt der<br /><a href="http://beuth-hochschule.de/" target="_blank"><img src="{{ STATIC_URL }}/images/beuth_logo.png"></a></div>
+        <div class="five columns omega" style="text-align: center">    Code & Design by<br /><a href="http://geosolution.org/" target="_blank"><img src="{{ STATIC_URL }}/images/gsolution.png"></a></div>
+    </div>
+</footer>
 </body>
 
 </html>

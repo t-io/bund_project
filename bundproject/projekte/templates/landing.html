@@ -91,35 +91,19 @@
 
     <div id="main_map"></div>
 </div>
-<section id="content">
-<div class="container">
-    <div class="sixteen columns omega">
+<section id="filterarea">
 
 
-
-            <!--  Dataset Filter Headline, changed if Values are filtered  -->
-            <h5>{{ filter_headline }}</h5>
-
-            <!--  Static Table Headlines  -->
             <table cellspacing="0">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Art</th>
-                    <th>Bundesland</th>
-                    <th>Typ</th>
-                    <th>Bedarf</th>
-                    <th>Planungsstand</th>
-                  </tr>
-                </thead>
 
                 <!--  Dataset Filter  -->
                 <form id="myform" action="{% url landing %}" method="post">{% csrf_token %}
                     <thead id="searchform">
                         <tr>
+                            <th></th>
+
                             <th style="text-align:center;">
-                                <button id="searchbutton" type="submit">filter</button>
+                                <button id="searchbutton" type="submit">Datensätze filtern</button>
                             </th>
                             {% for field in searchform %}
                                 {% if field.is_hidden %}
@@ -131,6 +115,34 @@
                         </tr>
                     </thead>
                 </form>
+            </table>
+
+
+
+</section>
+<section id="content">
+
+
+            <!--  Dataset Filter Headline, changed if Values are filtered  -->
+            <!-- <h5>{{ filter_headline }}</h5> -->
+
+            <!--  Static Table Headlines  -->
+            <table cellspacing="0">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Art</th>
+                    <th>Bundesland</th>
+                    <th>Typ</th>
+                    <th>Bedarf</th>
+                    <th>Planungsstand</th>
+                  </tr>
+                </thead>
+
+                <!--  Dataset Filter  -->
+
 
                 <!--  Dataset depending from Filter  -->
                 <tbody>
@@ -141,8 +153,21 @@
                             {% else %}
                                 <tr class="table_invisb">
                             {% endif%}
-                                <td></td>
-                                <td onclick="window.location.href='detail/{{line.slug}}'">{{ line.name }}</td>
+                                <td>
+                                    {% if line.sichtbar %}
+                                        <a href="detail/{{line.slug}}" class="databutton">Detailansicht</a>
+                                    {% else %}
+                                        <span class="databuttonInvisb">Detailansicht</a>
+                                    {% endif%}
+                                </td>
+                                <td>
+                                    {% if line.erstellt_von == user %}
+                                        <a href="#" class="databutton edit"><img src="{{ STATIC_URL }}/images/edit.gif" style="opacity: .6"></a>
+                                    {% else %}e
+                                    {% endif%}
+
+                                </td>
+                                <td style="text-align: left;">{{ line.name }}</td>
                                 <td>{{ line.art }}</td>
                                 <td>{{ line.bundesland }}</td>
                                 <td>{{ line.projekt_typ }}</td>
@@ -154,15 +179,26 @@
                         {% for line in show_lines %}
                             {% if line.sichtbar %}
                                 <tr class="table_visib">
-                                    <td></td>
-                                    <td onclick="window.location.href='detail/{{line.slug}}'">{{ line.name }}</td>
-                                    <td>{{ line.art }}</td>
-                                    <td>{{ line.bundesland }}</td>
-                                    <td>{{ line.projekt_typ }}</td>
-                                    <td>{{ line.bedarf }}</td>
-                                    <td>{{ line.planungsstand }}</td>
-                                </tr>
+                            {% else %}
+                                <tr class="table_invisb">
                             {% endif%}
+                                <td>
+                                    {% if line.sichtbar %}
+                                        <a href="detail/{{line.slug}}" class="databutton">Detailansicht</a>
+                                    {% else %}
+                                        <span class="databuttonInvisb">Detailansicht</a>
+                                    {% endif%}
+                                </td>
+                                <td>
+                                </td>
+                                <td style="text-align: left;">{{ line.name }}</td>
+                                <td>{{ line.art }}</td>
+                                <td>{{ line.bundesland }}</td>
+                                <td>{{ line.projekt_typ }}</td>
+                                <td>{{ line.bedarf }}</td>
+                                <td>{{ line.planungsstand }}</td>
+                            </tr>
+
                         {% endfor %}
                     {% endif %}
                     
@@ -187,15 +223,14 @@
 
                 </div>
             </div>
-        </div>
 
-    </div>
 </section>
 
 <footer>
     <div class="container">
-        <div class="eleven columns">&nbsp;</div>
-        <div class="five columns omega" style="text-align: center">    Code & Design by<br /><a href="http://geosolution.org/" target="_blank"><img src="../static/images/gsolution.png"></a></div>
+        <div class="six columns">&nbsp;</div>
+        <div class="five columns" style="text-align: center">Ein Projekt der<br /><a href="http://beuth-hochschule.de/" target="_blank"><img src="{{ STATIC_URL }}/images/beuth_logo.png"></a></div>
+        <div class="five columns omega" style="text-align: center">    Code & Design by<br /><a href="http://geosolution.org/" target="_blank"><img src="{{ STATIC_URL }}/images/gsolution.png"></a></div>
     </div>
 </footer>
 
@@ -207,7 +242,6 @@ var map = new MapMaker("main_map");
 
 // create empty map
 map.createMap();
-
 // add lines to map
 {% for line in show_lines %}
     // for every Line create an Array from LinePoints and call the createLine function 
@@ -220,8 +254,12 @@ map.createMap();
     {% endif %}
 {% endfor %}
 
+
+
 // show all Lines on the map
 map.showlines();
+
+
 
 //set the center, different by user/district
 map.setCenter(10.283203125, 51.31054714, 6);

@@ -5,8 +5,14 @@ function MapMaker(id) {
     this.proj_1 = new OpenLayers.Projection("EPSG:4326");
     this.proj_2 = new OpenLayers.Projection("EPSG:900913");
     
-    this.map = new OpenLayers.Map(this.id);
-    
+    this.map = new OpenLayers.Map(this.id, {controls: [
+        //enables the zoom control as a panel
+        new OpenLayers.Control.PanZoom(),
+        //disables the wheelzoom on map
+        new OpenLayers.Control.Navigation({zoomWheelEnabled: false})
+        ]});
+
+
     //Autobahn
     this.lines = [];
     
@@ -38,17 +44,23 @@ function MapMaker(id) {
 
     //Line Style Autobahn
     this.style_green = {
-        strokeColor: "#B59142",
-        strokeOpacity: 0.65,
-        strokeWidth: 3
+        strokeColor: "#f78d47",
+        strokeOpacity: 0.85,
+        strokeWidth: 3,
+        pointRadius: 30,
+        strokeDashstyle: "solid",
     };
     
     //Line Style Bundesstraße
     this.style_bund = {
-        strokeColor: "#FF31D1",
-        strokeOpacity: 0.65,
-        strokeWidth: 3
+        strokeColor: "#f75347",
+        strokeOpacity: 0.85,
+        strokeWidth: 3,
+        pointRadius: 30,
+        strokeDashstyle: "solid",
     };
+
+
 
     //create new Vector Layer for Points & Lines
     this.vectorLayerPoints = new OpenLayers.Layer.Vector("Points Umgehungsstraßen", {style: this.layer_style});
@@ -66,6 +78,8 @@ MapMaker.prototype = {
         this.map.addLayer(this.vectorLayerPoints);
         this.map.addLayer(this.vectorLayerLines);
         this.map.addLayer(this.vectorLayerLines2);
+
+
 
         //alert(this.map.getProjection());
     },  
@@ -116,5 +130,8 @@ MapMaker.prototype = {
         this.map.panTo(lonlat);
 
     }
+
+
+
 
 };  
