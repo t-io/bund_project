@@ -55,24 +55,67 @@ def landing(request):
                                     )
 
 
-#neuer Eintrag
-def add_road(request):
-    form = GeoForm(request.POST or None)
-    if form.is_valid():
+@login_required
+def add_road(request, slug_name=None):
+    
+    
+    if slug_name:    
+        headline = "Straße bearbeiten"
+        road = get_object_or_404(Road, slug = slug_name)
+        
+        if road.erstellt_von != request.user:
+            raise HttpResponseForbidden()
 
-        form.instance.erstellt_von = User.objects.get( username = request.user.username )
-        cmodel = form.save()
-        cmodel.save()
-        return redirect(landing)
+        form = GeoForm(data=request.POST or None, instance=road)
+
+    else:
+        form = GeoForm(request.POST or None)
+        headline = "Straße anlegen"
+
+    if request.POST:
+
+        '''
+        Eingabe ist nicht OK
+        '''
+
+        # wenn eingaben ok
+        if form.is_valid():
+            form.instance.erstellt_von = User.objects.get( username = request.user.username )
+            cmodel = form.save()
+            cmodel.save()
+            return redirect(landing)
     
 
-    return render_to_response('add.html', {'form': form},
+    return render_to_response('add.html', {
+                                            'headline': headline,
+                                            'form': form
+                                            },
                               context_instance=RequestContext(request))
 
+def edit_road(request, slug_name):
 
+    road = get_object_or_404(Road, slug = slug_name)
+    form = GeoForm(data=request.POST or None, instance=road)
+    headline = "Straße bearbeiten"
+
+    if request.method == 'POST':
+        if form.is_valid():
+            cmodel = form.save()
+            cmodel.save()
+            print "Valid"
+            return redirect('landing')
+        else:
+            print "Not Valid"
+
+
+
+    return render_to_response('add.html', {
+                                            'headline': headline,
+                                            'form': form
+                                        },
+                              context_instance=RequestContext(request))
 
 def details(request, slug_name):
-
     #Detailansicht einer einzelnen Strasse
     entry = get_object_or_404(Road, slug = slug_name)
     

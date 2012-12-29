@@ -6,7 +6,7 @@
   
   </head>
   <body>
-    <h1>Add Geometry</h1>
+    <h1>{{ headline }}</h1>
     <form method="post" action="/add/">
       {% csrf_token %}
       {{ form.as_p }}

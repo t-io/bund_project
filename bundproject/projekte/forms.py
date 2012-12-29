@@ -22,6 +22,7 @@ class SearchForm(forms.Form):
     )
 
     LAND = (
+        ('', '- Leere Auswahl -'),
         ('Berlin','Berlin'),
         ('Brandenburg', 'Brandenburg'),
         ('Sachsen', 'Sachsen'),
@@ -77,7 +78,7 @@ class SearchForm(forms.Form):
             query = query.filter(art__icontains = self.cleaned_data['art'])
 
         if (self.cleaned_data['bundesland'] is not None and self.cleaned_data['bundesland'] != ''):
-            query = query.filter(art__icontains = self.cleaned_data['bundesland'])
+            query = query.filter(bundesland__icontains = self.cleaned_data['bundesland'])
 
         if (self.cleaned_data['projekt_typ'] is not None and self.cleaned_data['projekt_typ'] != ''):
             query = query.filter(projekt_typ__icontains = self.cleaned_data['projekt_typ'])
@@ -90,13 +91,12 @@ class SearchForm(forms.Form):
         if (self.cleaned_data['planungsstand'] is not None and self.cleaned_data['planungsstand'] != ''):
             query = query.filter(planungsstand__icontains = self.cleaned_data['planungsstand'])
 
-
         return query
 
 
     def requestInfo(self):
         if(self.cleaned_data['name'] == '' and self.cleaned_data['art'] == '' 
-        and self.cleaned_data['projekt_typ'] == '' and self.cleaned_data['kosten'] == '' 
+        and self.cleaned_data['projekt_typ'] == '' and self.cleaned_data['bundesland'] == '' 
         and self.cleaned_data['bedarf'] == '' and self.cleaned_data['planungsstand']== '' ):
 
             return True;

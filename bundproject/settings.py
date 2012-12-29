@@ -9,6 +9,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+# local DB
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -19,6 +21,19 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+'''
+# WebDB
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'bundproject',                      # Or path to database file if using sqlite3.
+        'USER': 'PhoiPhoi',                      # Not used with sqlite3.
+        'PASSWORD': 'geoinformation',                  # Not used with sqlite3.
+        'HOST': 'SQL09.freemysql.net',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+'''
 
 AUTH_PROFILE_MODULE = 'bundproject.projekte.UserProfile'
     

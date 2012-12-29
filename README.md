@@ -19,9 +19,8 @@
 > The goal for this project is to build an application wich can handle line and point types
 > create, show and edit on an JS Map.
 
-###CURRENT STATE
->![alt text](https://github.com/t-io/bund_project/blob/master/current_state.png "LandingPage for the Project")
-
-
+###CREATE INITIAL EXAMPLE DATA
+>python manage.py dumpdata projekte.Road
+>copy paste them to fixtures/initial_data.json
 ###PROJECT MEMBER
 >grischa thomas sascha

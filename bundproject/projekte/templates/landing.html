@@ -161,9 +161,9 @@
                                     {% endif%}
                                 </td>
                                 <td>
-                                    {% if line.erstellt_von == user %}
-                                        <a href="#" class="databutton edit"><img src="{{ STATIC_URL }}/images/edit.gif" style="opacity: .6"></a>
-                                    {% else %}e
+                                    {% if line.erstellt_von == request.user %}
+                                        <a href="add/{{line.slug}}" class="databutton edit"><img src="{{ STATIC_URL }}/images/edit.gif" style="opacity: .6"></a>
+                                    
                                     {% endif%}
 
                                 </td>
