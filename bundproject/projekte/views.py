@@ -69,7 +69,7 @@ def add_road(request, slug_name=None):
         form = GeoForm(data=request.POST or None, instance=road)
 
     else:
-        form = GeoForm(request.POST or None)
+        form = GeoForm(request.POST or None, request.FILES)
         headline = "Straße anlegen"
 
     if request.POST:

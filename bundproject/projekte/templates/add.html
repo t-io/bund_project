@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>{{ headline }}</h1>
-    <form method="post" action="/add/">
+    <form enctype="multipart/form-data" method="post" action="/add/">
       {% csrf_token %}
       {{ form.as_p }}
       <p><input type="submit" value="Submit"></p>
