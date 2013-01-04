@@ -7,9 +7,16 @@
   </head>
   <body>
     <h1>{{ headline }}</h1>
-    <form enctype="multipart/form-data" method="post" action="/add/">
+    <form enctype="multipart/form-data" method="post" action="">
       {% csrf_token %}
       {{ form.as_p }}
+
+      {% comment %}
+      {{form.name.label_tag}}{{ form.name }}
+      {{form.bild.label_tag}} {{form.bild}}
+      {{form.line.label_tag}}{{ form.line }}
+      {% endcomment %}
+
       <p><input type="submit" value="Submit"></p>
     </form>
 

@@ -106,22 +106,23 @@ class Road(models.Model):
     )
 
     LAND = (
+        ('', '- Leere Auswahl -'),
         ('Berlin','Berlin'),
         ('Brandenburg', 'Brandenburg'),
         ('Sachsen', 'Sachsen'),
         ('Hamburg', 'Hamburg'),
         ('Bremen',  'Bremen'),
-        ('Mecklemburg Vorpommern', 'Mecklemburg Vorpommern'),
-        ('Tühringen',  'Tühringen'),
+        ('Mecklemburg-Vorpommern', 'Mecklemburg Vorpommern'),
+        ('Tuehringen',  'Tühringen'),
         ('Bayern', 'Bayern'),
-        ('Sachsen Anhalt','Sachsen Anhalt'),
+        ('Sachsen-Anhalt','Sachsen Anhalt'),
         ('Saarland',  'Saarland'),
         ('Hessen',  'Hessen'),
-        ('Nordrhein-Westfalen','Nordrhein-Westfalen'),
+        ('Nordrhein-Westfalen','Nordrhein Westfalen'),
         ('Niedersachsen', 'Niedersachsen'),
-        ('Schleswig Holstein', 'Schleswig Holstein'),
-        ('Bayern','Bayern'),
-        ('Rheinland-Pfalz','Rheinland-Pfalz'),
+        ('Schleswig-Holstein', 'Schleswig Holstein'),
+        ('Rheinland-Pfalz','Rheinland Pfalz'),
+        ('Baden-Wuerttemberg','Baden Württemberg'),
     )
 
     # Straßen Informationen
@@ -134,6 +135,7 @@ class Road(models.Model):
     kosten = models.DecimalField("Kosten in Mio Euro", max_digits=10, decimal_places=2)
     bedarf = models.CharField("Bedarf", max_length=2, choices=(('VB','vordringlicher Bedarf'),('WB','weiterer Bedarf'),('KB','kein Bedarf')), blank=True, null = True)
     planungsstand = models.CharField("Planungsstand", max_length=40, choices=PLANUNSSTD, blank=True, null = True)
+    laenge = models.DecimalField("Länge in Kilometer",max_digits=5, decimal_places=1, blank=True, null = True)
 
     # Geometrie
     line = models.LineStringField(srid=4269)
@@ -148,7 +150,7 @@ class Road(models.Model):
     #Planungsziele & BUND Position
     projekt_ziel = models.TextField("Offizielles Projektziel",blank=True, null = True, validators=[MaxLengthValidator(1200)])
     kritik = models.TextField("Kritik", blank=True, null = True, validators=[MaxLengthValidator(1200)])
-    alternativen = models.TextField("Alternativen",blank=True, null = True, validators=[MaxLengthValidator(1200)])
+    #alternativen = models.TextField("Alternativen",blank=True, null = True, validators=[MaxLengthValidator(1200)])
 
     bild = models.ImageField(upload_to ="photos/roads/%Y%m%d/%H%M%S/", blank = True, null=True)
 

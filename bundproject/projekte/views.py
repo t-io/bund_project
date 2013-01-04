@@ -57,8 +57,6 @@ def landing(request):
 
 @login_required
 def add_road(request, slug_name=None):
-    
-    
     if slug_name:    
         headline = "Straße bearbeiten"
         road = get_object_or_404(Road, slug = slug_name)
@@ -73,19 +71,12 @@ def add_road(request, slug_name=None):
         headline = "Straße anlegen"
 
     if request.POST:
-
-        '''
-        Eingabe ist nicht OK
-        '''
-
-        # wenn eingaben ok
         if form.is_valid():
             form.instance.erstellt_von = User.objects.get( username = request.user.username )
             cmodel = form.save()
             cmodel.save()
             return redirect(landing)
     
-
     return render_to_response('add.html', {
                                             'headline': headline,
                                             'form': form
