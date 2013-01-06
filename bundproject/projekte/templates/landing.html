@@ -91,7 +91,12 @@
 
     <div id="main_map"></div>
 </div>
-<section id="filterarea">
+{% if user.is_authenticated %}
+<section id="addproject">
+<a href="./add/" id="addprojectbutton">Neues Projekt anlegen</a>
+</section>
+{% endif%}
+<section id="filterArea">
 
 
             <table cellspacing="0">
@@ -182,6 +187,7 @@
                             {% else %}
                                 <tr class="table_invisb">
                             {% endif%}
+                            {% if line.sichtbar %}
                                 <td>
                                     {% if line.sichtbar %}
                                         <a href="detail/{{line.slug}}" class="databutton">Detailansicht</a>
@@ -198,6 +204,8 @@
                                 <td>{{ line.bedarf }}</td>
                                 <td>{{ line.planungsstand }}</td>
                             </tr>
+                            {% else %}
+                            {% endif%}
 
                         {% endfor %}
                     {% endif %}
@@ -230,7 +238,7 @@
     <div class="container">
         <div class="six columns">&nbsp;</div>
         <div class="five columns" style="text-align: center">Ein Projekt der<br /><a href="http://beuth-hochschule.de/" target="_blank"><img src="{{ STATIC_URL }}/images/beuth_logo.png"></a></div>
-        <div class="five columns omega" style="text-align: center">    Code & Design by<br /><a href="http://geosolution.org/" target="_blank"><img src="{{ STATIC_URL }}/images/gsolution.png"></a></div>
+        <div class="five columns omega" style="text-align: center">    Code & Design by<br /><img src="{{ STATIC_URL }}/images/gsolution.png"></div>
     </div>
 </footer>
 

@@ -28,17 +28,17 @@ class SearchForm(forms.Form):
         ('Sachsen', 'Sachsen'),
         ('Hamburg', 'Hamburg'),
         ('Bremen',  'Bremen'),
-        ('Mecklemburg-Vorpommern', 'Mecklemburg Vorpommern'),
-        ('Tuehringen',  'Tühringen'),
+        ('Mecklemburg-Vorpommern', 'Mecklemburg-Vorpommern'),
+        ('Thueringen',  'Thüringen'),
         ('Bayern', 'Bayern'),
-        ('Sachsen-Anhalt','Sachsen Anhalt'),
+        ('Sachsen-Anhalt','Sachsen-Anhalt'),
         ('Saarland',  'Saarland'),
         ('Hessen',  'Hessen'),
-        ('Nordrhein-Westfalen','Nordrhein Westfalen'),
+        ('Nordrhein-Westfalen','Nordrhein-Westfalen'),
         ('Niedersachsen', 'Niedersachsen'),
-        ('Schleswig-Holstein', 'Schleswig Holstein'),
-        ('Rheinland-Pfalz','Rheinland Pfalz'),
-        ('Baden-Wuerttemberg','Baden Württemberg'),
+        ('Schleswig-Holstein', 'Schleswig-Holstein'),
+        ('Rheinland-Pfalz','Rheinland-Pfalz'),
+        ('Baden-Wuerttemberg','Baden-Württemberg'),
     )
 
     name = forms.CharField(widget=forms.TextInput, required=False, label='', max_length=200)
@@ -106,8 +106,8 @@ class SearchForm(forms.Form):
 
 
 class LineWidget(forms.gis.LineStringWidget, forms.gis.BaseOsmWidget):
-    map_width = 800
-    map_height = 600
+    map_width = 580
+    map_height = 300
     template_name = 'forms/custom.html'
 
 

@@ -358,13 +358,13 @@ header nav ul li a.street {
 	border-top: 2px solid #7bb51d;
 	border-bottom: 0px solid #7bb51d;
 	margin-bottom: -30px;
-
 }
 /* end */
 /* ==== content table elements === */
 select {
   font:100 10px 'Arial', sans-serif;
   color: #888;
+  width: 90%;
   -webkit-appearance: button;
   -webkit-border-radius: 2px;
   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -392,6 +392,152 @@ select:hover {
   background-image: url(../images/select_right_.png);
 }
 
+#submitbutton {
+  -webkit-appearance: button;
+  -webkit-border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  -webkit-user-select: none;
+  background: -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+  border: 1px solid #AAA;
+  color: #888;
+  font-size: inherit;
+  margin: 0;
+  overflow: hidden;
+  padding: 4px 8px 4px 8px;
+  text-decoration: none;
+  text-align: center;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+#submitbutton:hover {
+  background: #cecece;
+}
+
+input[type="checkbox"] {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+}
+
+input[type="file"] {
+  font:100 14px 'Arial', sans-serif;
+  color: #888;
+  width: 100%;
+  height: 28px;
+  -webkit-border-radius: 2px;
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  background: -webkit-linear-gradient(#f7f7f7, #fafafa 40%, #fff);
+  margin: 0;
+  overflow: hidden;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  white-space: nowrap;
+  min-width: 100px;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+input {
+  font:100 14px 'Arial', sans-serif;
+  color: #888;
+  width: 90%;
+  height: 28px;
+  -webkit-border-radius: 2px;
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  background: -webkit-linear-gradient(#f7f7f7, #fafafa 40%, #fff);
+  background-position: center right;
+  background-repeat: no-repeat;
+  margin: 0;
+  overflow: hidden;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  white-space: nowrap;
+  min-width: 100px;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+textarea {
+  font:100 14px 'Arial', sans-serif;
+  color: #888;
+  width: 100%;
+  min-height: 25px;
+  -webkit-border-radius: 2px;
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  background: -webkit-linear-gradient(#f7f7f7, #fafafa 40%, #fff);
+  background-position: center right;
+  background-repeat: no-repeat;
+  margin: 0;
+  overflow: hidden;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  white-space: nowrap;
+  min-width: 100px;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+
+
+
+
+#addproject {
+  -moz-box-shadow: -6px -6px 0px rgba(0,0,0,0.15);
+  -webkit-box-shadow: -6px -6px 0px rgba(0,0,0,0.15);
+  box-shadow: -6px -6px 0px rgba(0,0,0,0.15);
+  overflow:hidden;
+  width: 99%;
+  border-top: 1px solid #d5d5d5;
+  border-bottom: 1px solid #d5d5d5;
+  background: #fff;
+  padding: 5px 5px 5px 5px;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#efefef), to(#fafafa));
+  background: -moz-linear-gradient(top, #efefef, #fafafa);
+  -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=#efefef, endColorStr=#fafafa);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=#efefef, endColorStr=#fafafa);
+  text-align: right;
+}
+
+#addprojectbutton {
+  -webkit-border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  -webkit-user-select: none;
+  background: -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+  border: 1px solid #AAA;
+  color: #888;
+  font-size: inherit;
+  margin: 0;
+  overflow: hidden;
+  padding: 4px 8px 4px 8px;
+  text-decoration: none;
+  text-align: center;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+
 /* ==== SECTION FILTERAREAS === */
 #filterArea {
   width: 100%;  
@@ -402,9 +548,6 @@ select:hover {
 }
 /* Table Elements */
 #filterArea table {
-  -moz-box-shadow: -6px -6px 0px rgba(0,0,0,0.15);
-  -webkit-box-shadow: -6px -6px 0px rgba(0,0,0,0.15);
-  box-shadow: -6px -6px 0px rgba(0,0,0,0.15);
   overflow:hidden;
   background:#fefefe;
   min-width: 960px;
@@ -430,15 +573,16 @@ select:hover {
   width: 4%;
   min-width; 50px;
   text-align: center;
-  border-left:0px; 
+  border-left:0px;
+  border-right:0px;
 }
 #filterArea th:nth-child(2) { width: 10%; border-left:0px; }
-#filterArea th:nth-child(3) { width: 25%; text-align: left; }
+#filterArea th:nth-child(3) { width: 20%; text-align: left; }
 #filterArea th:nth-child(4) { width: 10%; }
 #filterArea th:nth-child(5) { width: 15%; }
 #filterArea th:nth-child(6) { width: 10%; }
 #filterArea th:nth-child(7) { width: 10%; }
-#filterArea th:last-child { width: 16%; border-right:0px; }
+#filterArea th:last-child { width: 21%; border-right:0px; }
 
 
 /* ==== All other table elements === */
@@ -479,12 +623,12 @@ td:first-child {
   text-align: center;
 }
 td:nth-child(2) { width: 4%; text-align: center;}
-td:nth-child(3) { width: 25%; }
+td:nth-child(3) { width: 20%; }
 td:nth-child(4) { width: 10%; }
 td:nth-child(5) { width: 15%; }
 td:nth-child(6) { width: 10%; }
 td:nth-child(7) { width: 10%; }
-td:last-child { width: 16%; }
+td:last-child { width: 21%; }
 /* TH definitions and grid properties */
 th:first-child {
   width: 10%;
@@ -492,12 +636,12 @@ th:first-child {
   text-align: center;
 }
 th:nth-child(2) { width: 4%; text-align: center;}
-th:nth-child(3) { width: 25%; }
+th:nth-child(3) { width: 20%; }
 th:nth-child(4) { width: 10%; }
 th:nth-child(5) { width: 15%; }
 th:nth-child(6) { width: 10%; }
 th:nth-child(7) { width: 10%; }
-th:last-child { width: 16%; }
+th:last-child { width: 21%; }
 /* Hover styles */
 tr:hover, tr:nth-child(even):hover {
   background: #f0f0f0;
@@ -742,10 +886,18 @@ div.selector select { width: 202px; cursor: pointer; font-size: 12px; position: 
 /* Float alignments for grid elements */
 #content .left {
   float: left;
-  width: 20%;
+  width: 16%;
 }
 #content .right {
   float: left;
-  width: 80%;
+  width: 21%;
 }
 /* SECTION END */
+
+#addmap #id_line{
+  width:200px;
+  height: 150px;
+  border-top: 2px solid #7bb51d;
+  border-bottom: 0px solid #7bb51d;
+  margin-bottom: -30px;
+}

@@ -78,6 +78,19 @@
 
                 <div class="headline" style="margin-top: 10px;">Details zum Projekt: {{road.name}}</div>
 
+
+                <div class="content">
+                    <div class="container">
+                        <div class="left">
+                            Bundesland
+                        </div>
+                        <div class="right">
+                            {{ road.bundesland }}
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="content">
                     <div class="container">
                         <div class="left">
@@ -149,6 +162,17 @@
                         </div>
                         <div class="right">
                             {{road.verlauf_bis}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="container">
+                        <div class="left">
+                            Länge:
+                        </div>
+                        <div class="right">
+                            {{road.laenge}}
                         </div>
                     </div>
                 </div>
@@ -232,12 +256,6 @@
                         </p>
                 </div>
 
-                <div class="headline" style="margin-top: 10px;">Alternativen</div>
-                <div class="content bottom">
-                        <p>
-                        {{road.alternativen}}
-                        </p>
-                </div>
 
             </div>
         </div>
@@ -248,7 +266,7 @@
     <div class="container">
         <div class="six columns">&nbsp;</div>
         <div class="five columns" style="text-align: center">Ein Projekt der<br /><a href="http://beuth-hochschule.de/" target="_blank"><img src="{{ STATIC_URL }}/images/beuth_logo.png"></a></div>
-        <div class="five columns omega" style="text-align: center">    Code & Design by<br /><a href="http://geosolution.org/" target="_blank"><img src="{{ STATIC_URL }}/images/gsolution.png"></a></div>
+        <div class="five columns omega" style="text-align: center">    Code & Design by<br /><img src="{{ STATIC_URL }}/images/gsolution.png"></div>
     </div>
 </footer>
 </body>
