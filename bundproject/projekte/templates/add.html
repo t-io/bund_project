@@ -60,7 +60,7 @@
 <section id="content">
     <div class="container" style="margin-top: 10px;">
         <div class="sixteen columns">
-            <div class="headline top bottom">Sie befinden sich hier: <a href="../../">Übersicht</a> / {{road.name}}</div>
+            <div class="headline top bottom">Sie befinden sich hier: <a href="../../">Übersicht</a> / Projekt anlegen/editieren</div>
         </div>
 
         <form enctype="multipart/form-data" method="post" action="">
@@ -100,7 +100,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            Projektart:
+                            {{form.art.label_tag}}:
                         </div>
                         <div class="right">
                           {{ form.art }}
@@ -111,7 +111,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            Projekttyp
+                            {{form.projekt_typ.label_tag}}
                         </div>
                         <div class="right">
                           {{ form.projekt_typ }}
@@ -122,7 +122,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            Bedarf
+                            {{form.bedarf.label_tag}}
                         </div>
                         <div class="right">
                             {{ form.bedarf }}
@@ -133,7 +133,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            Verlauf von
+                            {{form.verlauf_von.label_tag}}
                         </div>
                         <div class="right">
                             {{form.verlauf_von}}
@@ -144,7 +144,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            bis
+                            {{form.verlauf_bis.label_tag}}
                         </div>
                         <div class="right">
                             {{form.verlauf_bis}}
@@ -155,7 +155,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            Länge
+                            {{form.laenge.label_tag}}
                         </div>
                         <div class="right">
                             {{form.laenge}}
@@ -165,7 +165,7 @@
                 <div class="content bottom">
                     <div class="container">
                         <div class="left">
-                            Kosten:
+                            {{form.kosten.label_tag}}
                         </div>
                         <div class="right">
                             {{form.kosten}}
@@ -179,7 +179,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            Planungsstand
+                            {{form.planungsstand.label_tag}}:
                         </div>
                         <div class="right">
                             {{form.planungsstand}}
@@ -190,10 +190,10 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            Kosten-/Nutzungsverhältnis
+                            {{form.nutz_kost_verh_2003.label_tag}}
                         </div>
                         <div class="right">
-                            {{form.nutz_kost_verh}}
+                            {{form.nutz_kost_verh_2003}}
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,18 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            Umweltrisiko
+                            {{form.nutz_kost_verh_2015.label_tag}}
+                        </div>
+                        <div class="right">
+                            {{form.nutz_kost_verh_2015}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="container">
+                        <div class="left">
+                            {{form.umweltrisiko.label_tag}}:
                         </div>
                         <div class="right">
                             {{form.umweltrisiko}}
@@ -223,10 +234,10 @@
                 <div class="content bottom">
                     <div class="container">
                         <div class="left">
-                            Raumwirsamkeitanalyse
+                            {{form.vert_entw_ziel.label_tag}}
                         </div>
                         <div class="right">
-                            {{form.raumw_analyse}}<br/>
+                            {{form.vert_entw_ziel}}<br/>
                         </div>
                     </div>
                 </div>
@@ -238,7 +249,7 @@
             <div class="ten columns omega">
 
 
-                <div class="headline">Projektziel</div>
+                <div class="headline">{{form.projekt_ziel.label_tag}}:</div>
                 <div class="content bottom">
                         <p>
                         {{form.projekt_ziel}}
@@ -246,14 +257,14 @@
                 </div>
 
 
-                <div class="headline" style="margin-top: 10px;">Kritik</div>
+                <div class="headline" style="margin-top: 10px;">{{form.kritik.label_tag}}:</div>
                 <div class="content bottom">
                         <p>
                         {{form.kritik}}
                         </p>
                 </div>
 
-                <div class="headline" style="margin-top: 10px;">{{form.line.label_tag}}</div>
+                <div class="headline" style="margin-top: 10px;">Geometrie</div>
                 <div class="content bottom" style="height: 320px;">
                   <section id="addmap">
                     {{ form.line }}

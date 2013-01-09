@@ -145,7 +145,7 @@ class Road(models.Model):
     nutz_kost_verh_2003 = models.DecimalField("Nutzen/Kosten Verhältnis 2003",max_digits=4, decimal_places=1)
     nutz_kost_verh_2015 = models.DecimalField("Nutzen/Kosten Verhältnis 2015",max_digits=4, decimal_places=1)
     umweltrisiko = models.CharField("Umweltrisiko", max_length=12, choices=RISIKO, blank=True, null = True)
-    vert_entw_ziel = models.IntegerField("Verteilungs und Entwicklungsziele", blank=True, null = True)
+    vert_entw_ziel = models.IntegerField("Verteilungs- und Entwicklungsziele", blank=True, null = True)
     stadr_bewert = models.IntegerField("Städtebauliche Bewertung", blank=True, null = True)
 
     #Planungsziele & BUND Position
