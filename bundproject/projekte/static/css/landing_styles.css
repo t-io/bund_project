@@ -807,6 +807,10 @@ div.selector select { width: 202px; cursor: pointer; font-size: 12px; position: 
 /* === SECTION CONTENT === */
 #content {
 }
+#content b{
+  font-weight: bold;
+  color: #435d2e;
+}
 #content .headline {
   text-shadow: 1px 1px 1px #fff;
   overflow:hidden;

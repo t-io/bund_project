@@ -106,8 +106,8 @@ class SearchForm(forms.Form):
 
 
 class LineWidget(forms.gis.LineStringWidget, forms.gis.BaseOsmWidget):
-    map_width = 580
-    map_height = 300
+    map_width = 940
+    map_height = 400
     template_name = 'forms/custom.html'
 
 

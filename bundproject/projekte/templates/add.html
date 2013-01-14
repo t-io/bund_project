@@ -66,6 +66,17 @@
         <form enctype="multipart/form-data" method="post" action="">
         {% csrf_token %}
 
+
+        <div class="sixteen columns">
+            <div class="headline" style="margin-top: 10px;">Geometrie</div>
+            <div class="content bottom" style="height: 420px;">
+              <section id="addmap">
+                {{ form.line }}
+              </section>
+            </div>
+        </div>
+
+
         <div class="sixteen columns">
             <div class="six columns alpha">
 
@@ -78,7 +89,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            {{form.name.label_tag}}
+                            <b>{{form.name.label_tag}}</b>
                         </div>
                         <div class="right">
                             {{ form.name }}
@@ -89,7 +100,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            {{form.bundesland.label_tag}}
+                            <b>{{form.bundesland.label_tag}}</b>
                         </div>
                         <div class="right">
                             {{ form.bundesland }}
@@ -133,7 +144,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            {{form.verlauf_von.label_tag}}
+                            <b>{{form.verlauf_von.label_tag}}</b>
                         </div>
                         <div class="right">
                             {{form.verlauf_von}}
@@ -144,7 +155,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            {{form.verlauf_bis.label_tag}}
+                            <b>{{form.verlauf_bis.label_tag}}</b>
                         </div>
                         <div class="right">
                             {{form.verlauf_bis}}
@@ -165,7 +176,7 @@
                 <div class="content bottom">
                     <div class="container">
                         <div class="left">
-                            {{form.kosten.label_tag}}
+                            <b>{{form.kosten.label_tag}}</b>
                         </div>
                         <div class="right">
                             {{form.kosten}}
@@ -190,7 +201,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            {{form.nutz_kost_verh_2003.label_tag}}
+                            <b>{{form.nutz_kost_verh_2003.label_tag}}</b>
                         </div>
                         <div class="right">
                             {{form.nutz_kost_verh_2003}}
@@ -201,7 +212,7 @@
                 <div class="content">
                     <div class="container">
                         <div class="left">
-                            {{form.nutz_kost_verh_2015.label_tag}}
+                            <b>{{form.nutz_kost_verh_2015.label_tag}}</b>
                         </div>
                         <div class="right">
                             {{form.nutz_kost_verh_2015}}
@@ -242,7 +253,6 @@
                     </div>
                 </div>
 
-<div class="headline bottom"><input id="submitbutton" type="submit" value="Daten absenden"></div>
 
 
             </div>
@@ -264,15 +274,22 @@
                         </p>
                 </div>
 
-                <div class="headline" style="margin-top: 10px;">Geometrie</div>
-                <div class="content bottom" style="height: 320px;">
-                  <section id="addmap">
-                    {{ form.line }}
-                  </section>
+
+                <div class="headline bottom">
+                    <i>Sämtliche <b>fett geschriebenen</b> Felder sind Pflichtfelder</i>
                 </div>
+
+                <div class="headline bottom">
+                    <input id="submitbutton" type="submit" value="Daten absenden">
+                </div>
+
+
+
 
             </div>
         </div>
+
+
 
 
     </form>
