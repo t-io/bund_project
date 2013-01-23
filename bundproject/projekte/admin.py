@@ -65,18 +65,19 @@ class RoadAdmin(admin.OSMGeoAdmin):
     pnt.transform(900913)
     default_lon, default_lat = pnt.coords
 
-
+    
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'erstellt_von':
-            kwargs['queryset'] = User.objects.filter(username=request.user.username)
+            pass
+            #kwargs['queryset'] = User.objects.filter(username=request.user.username)
         return super(RoadAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
-
+    '''
     def get_readonly_fields(self, request, obj=None):
         if obj is not None:
             return self.readonly_fields + ('erstellt_von',)
         return self.readonly_fields
-
+    '''
 
     def add_view(self, request, form_url="", extra_context=None):
         data = request.GET.copy()
@@ -86,7 +87,7 @@ class RoadAdmin(admin.OSMGeoAdmin):
 
 
 class LocationAdmin(admin.GeoModelAdmin):
-	pass
+    pass
 
 class RailsAdmin(admin.GeoModelAdmin):
 	pass
