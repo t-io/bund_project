@@ -22,5 +22,6 @@
 ###CREATE INITIAL EXAMPLE DATA
 >python manage.py dumpdata projekte.Road
 >copy paste them to fixtures/initial_data.json
-###PROJECT MEMBER
->grischa thomas sascha
+
+###PICTURES
+<a href="http://www.flickr.com/photos/t_io/sets/72157634318569472" target="_blank">some screenshots</a>

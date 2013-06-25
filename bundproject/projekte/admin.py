@@ -57,7 +57,7 @@ class UsersAdmin(UserAdmin):
 
 class RoadAdmin(admin.OSMGeoAdmin):
     search_fields = ['name']
-    list_display = ['sichtbar','name','art','projekt_typ','verlauf_von','verlauf_bis','kosten','bedarf','planungsstand','vert_entw_ziel']
+    list_display = ['name','sichtbar','art','projekt_typ','verlauf_von','verlauf_bis','kosten','bedarf','planungsstand','vert_entw_ziel']
 
 
     default_zoom = 6
